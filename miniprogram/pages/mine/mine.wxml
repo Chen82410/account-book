@@ -1,0 +1,10 @@
+<!--miniprogram/pages/mine/mine.wxml-->
+<view class='mine-root'>
+  <view class='personal-msg'>
+    <image src='{{avatarUrl}}'></image>
+    <view class='nickname-phone'>
+      <text class='nickname'>设置昵称</text>
+      <text class='phone'>18842691097</text>
+    </view>
+  </view>
+</view>

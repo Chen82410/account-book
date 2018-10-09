@@ -1,0 +1,40 @@
+<view class='home-root'>
+  <view class='home-bg'>
+    <view class='container-part'>
+      <view class='total-account'>
+        <view class='today common'>
+          <view class='title'>今日支出/收入</view>
+          <view class='main-content'>
+            <view class='left'>
+              <text class='top'>食物&餐饮</text>
+              <text class='bottom'>支出/收入</text>
+            </view>
+            <view class='right'>
+              <text class='top'>-￥18.00</text>
+              <text class='bottom'>20分钟前</text>
+            </view>
+          </view>
+        </view>
+        <view class='today common'>
+          <view class='title'>历史支出/收入</view>
+          <view class='main-content'>
+            <view class='left'>
+              <text class='top'>食物&餐饮</text>
+              <text class='bottom'>支出/收入</text>
+            </view>
+            <view class='right'>
+              <text class='top'>-￥18.00</text>
+              <text class='bottom'>20分钟前</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <image class='add-icon' src='{{addImage.src}}' bindtap='isCalculated'></image>
+  </view>
+  <caculator 
+  is-show="{{calculatorShow}}" 
+  bind:hidePanel="onHidePanel" 
+  bind:calculate="bindCalculate">
+  </caculator>
+</view>

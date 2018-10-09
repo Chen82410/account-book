@@ -1,0 +1,17 @@
+<!--components/calculator/calculator.wxml-->
+<view class='calculator-root' wx:if="{{isShow}}" bindtap='hidePanel'>
+  <view class='calculator-panel'>
+    <view class='total-msg'>
+      <text class='unit'>￥</text>
+      <view class='total-number'>{{totalCount}}</view>
+    </view>
+    <view class='main-panel'>
+      <view 
+      class='item' 
+      wx:for="{{panelMsg}}" 
+      wx:key="key"
+      catchtap='calculate' 
+      data-calculate-msg="{{item}}">{{item}}</view>
+    </view>
+  </view>
+</view>

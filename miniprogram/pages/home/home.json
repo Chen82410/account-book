@@ -1,0 +1,6 @@
+{
+  "navigationBarBackgroundColor": "#1296db",
+  "usingComponents": {
+    "caculator": "../../components/calculator/calculator"
+  }
+}
