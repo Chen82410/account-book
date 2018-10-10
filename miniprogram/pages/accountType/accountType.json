@@ -1,3 +1,6 @@
 {
-  "navigationBarBackgroundColor": "#1296db"
+  "navigationBarBackgroundColor": "#1296db",
+  "usingComponents": {
+    "sortType": "../../components/sortType/sortType"
+  }
 }

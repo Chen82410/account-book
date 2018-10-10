@@ -4,57 +4,45 @@
     <scroll-view scroll-x="true" class='type'>
       <view class="{{currentTab==0 ? 'on' : ''}}" 
       bindtap='switchTab'
-      data-currentIndex='0'>支出</view>
+      data-current-index='0'>支出</view>
       <view class="{{currentTab==1 ? 'on' : ''}}" 
       bindtap='switchTab'
-      data-currentIndex='1'>收入</view>
+      data-current-index='1'>收入</view>
       <view class="{{currentTab==2 ? 'on' : ''}}" 
       bindtap='switchTab'
-      data-currentIndex='2'>转账</view>
+      data-current-index='2'>转账</view>
     </scroll-view>
     <swiper class='scroll-part'
       current='{{currentTab}}'
       bindchange="itemChange">
-      <swiper-item class='pay' id='pay0'>
+      <swiper-item class='pay' wx:for="{{allTypes}}" wx:key="index">
         <view class='title'>
-          <text>-￥{{calculateRes}}</text>
-        </view>
-        <view class='type-part'>
-          <text class='type-text'>分类</text>
-          <text class='type-detail'>食物&酒水</text>
-        </view>
-        <view class='remark-part'>
-          <text class='remark'>备注</text>
-          <text class='remark-content'>单击添加备注</text>
-        </view>
-      </swiper-item>
-      <swiper-item class='pay' id='pay1'>
-        <view class='title'>
-          <text>+￥{{calculateRes}}</text>
-        </view>
-        <view class='type-part'>
-          <text class='type-text'>分类</text>
-          <text class='type-detail'>工资</text>
-        </view>
-        <view class='remark-part'>
-          <text class='remark'>备注</text>
-          <text class='remark-content'>单击添加备注</text>
-        </view>
-      </swiper-item>
-      <swiper-item class='pay' id='pay2'>
-        <view class='title'>
+          <text>{{accountType[currentTab]}}</text>
           <text>￥{{calculateRes}}</text>
         </view>
         <view class='type-part'>
           <text class='type-text'>分类</text>
-          <text class='type-detail'>支付宝</text>
+          <text class='type-detail'
+           bindtap='showTypePanel'
+           data-index='{{index}}'>{{userChoice}}</text>
         </view>
         <view class='remark-part'>
           <text class='remark'>备注</text>
-          <text class='remark-content'>单击添加备注</text>
+          <!-- <text class='remark-content'>单击添加备注</text> -->
+          <textarea class='remark-content' 
+          placeholder='单击添加备注'
+          show-confirm-bar="false"
+          bindinput='inputContent'
+          value="{{remarkContent}}"></textarea>
         </view>
       </swiper-item>
     </swiper>
   </view>
-  <button>保 存</button>
+  <button bindtap='submitRecord'>保 存</button>
+  <sortType
+  is-show="{{!toHidePanel}}"
+  bind:toHide="onHidePanel"
+  bind:chooseType="onChooseType"
+  type="{{currentType}}">
+  </sortType>
 </view>

@@ -1,0 +1,13 @@
+<!--components/sortType/sortType.wxml-->
+<view class='sortType-root' bindtap='toHide' wx:if="{{isShow}}">
+  <view class='main-panel'>
+    <view class='title'>分类</view>
+    <view class='type-detail'>
+      <view class='type-item' 
+      wx:for="{{type}}" 
+      wx:key="key"
+      catchtap='chooseType'
+      data-item='{{item}}'>{{item}}</view>
+    </view>
+  </view>
+</view>

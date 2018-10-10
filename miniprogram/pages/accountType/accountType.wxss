@@ -90,6 +90,13 @@
   margin-bottom: 8rpx;
 }
 
+.remark-part .remark-content {
+  color: #4d4d4d;
+  width: 100%;
+  height: 60rpx;
+  box-sizing: border-box;
+}
+
 .accountType-root button {
   width: 80%;
   background-color: #1496db;
@@ -97,4 +104,9 @@
   position: absolute;
   left: 10%;
   bottom: 64rpx;
+}
+
+.accountType-root button:active {
+  color: #1496db;
+  background-color: #fff;
 }

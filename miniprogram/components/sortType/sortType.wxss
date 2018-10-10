@@ -1,0 +1,44 @@
+/* components/sortType/sortType.wxss */
+.sortType-root {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sortType-root .main-panel {
+  width: 60%;
+  max-height: 70%;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 16rpx 32rpx;
+  overflow: scroll;
+}
+
+.main-panel .title {
+  width: 100%;
+  height: 80rpx;
+  font-size: 40rpx;
+  color: #4d4d4d;
+  font-weight: bold;
+}
+
+.main-panel .type-detail {
+  width: 100%;
+  max-height: 90%;
+}
+
+.type-detail .type-item {
+  width: 100%;
+  height: 70rpx;
+  border-bottom: 2rpx solid #ccc;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #4d4d4d;
+}
