@@ -28,12 +28,7 @@
         </view>
         <view class='remark-part'>
           <text class='remark'>备注</text>
-          <!-- <text class='remark-content'>单击添加备注</text> -->
-          <textarea class='remark-content' 
-          placeholder='单击添加备注'
-          show-confirm-bar="false"
-          bindinput='inputContent'
-          value="{{remarkContent}}"></textarea>
+          <text bindtap='toAddRemark'>{{remarkContent}}</text>          
         </view>
       </swiper-item>
     </swiper>
@@ -45,4 +40,19 @@
   bind:chooseType="onChooseType"
   type="{{currentType}}">
   </sortType>
+  <view class='remark-textarea' wx-if="{{addRemark}}">
+    <view class='remark-panel'>
+      <input class='remark-content'       
+      fixed='true'  
+      focus="true"    
+      show-confirm-bar="false"
+      bindinput='inputContent'
+      placeholder='单击添加备注'
+      value="{{remarkContent}}"></input>
+      <view class='confirm-panel'>
+        <text class='confirm' bindtap='confirm'>确 定</text>
+        <text class='cancle' bindtap='cancle'>取 消</text>        
+      </view>
+    </view>     
+  </view>
 </view>

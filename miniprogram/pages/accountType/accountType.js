@@ -19,7 +19,9 @@ Page({
     // 选中显示
     userChoice: "",
     // 备注内容
-    remarkContent: "",
+    remarkContent: "单击添加备注",
+    // 是否添加备注
+    addRemark: false
   }, 
 
   /**
@@ -117,6 +119,24 @@ Page({
       currentType: this.data.allTypes[index]
     })
   },
+  // 添加备注
+  toAddRemark: function () {
+    this.setData({
+      remarkContent: "",
+      addRemark: !this.data.addRemark
+    })
+  },
+  confirm: function () {
+    this.setData({
+      addRemark: !this.data.addRemark
+    })
+  },
+  cancle: function () {
+    this.setData({
+      remarkContent: "点击添加备注",
+      addRemark: !this.data.addRemark
+    })
+  },
   // 监听选择类型
   onChooseType: function (e) {
     this.setData({
@@ -132,7 +152,7 @@ Page({
   // 提交记录
   submitRecord: function () {
     // console.log(this.data.remarkContent)
-    // console.log(this.data.userChoice)
+    // console.log(this.data.userChoice)    
     let that = this
     wx.cloud.callFunction({
       name: "addAccountRecord",
@@ -140,7 +160,7 @@ Page({
         fee: that.data.calculateRes,
         account_type: that.data.currentTab,
         account_description: that.data.userChoice,
-        remark_content: that.data.remarkContent
+        remark_content: that.data.remarkContent == "单击添加备注" ? "" : that.data.remarkContent
       }
     }).then(res => {
       console.log(res)

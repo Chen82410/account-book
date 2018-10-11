@@ -95,6 +95,7 @@
   width: 100%;
   height: 60rpx;
   box-sizing: border-box;
+  background-color: red;
 }
 
 .accountType-root button {
@@ -109,4 +110,44 @@
 .accountType-root button:active {
   color: #1496db;
   background-color: #fff;
+}
+
+.accountType-root .remark-textarea {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.remark-textarea .remark-panel {
+  width: 70%;
+  height: 160rpx;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 16rpx 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.remark-panel .remark-content {
+  border-bottom: 1px solid #ccc;
+}
+
+.remark-panel .confirm-panel {
+  margin-top: 20rpx;
+  color: #4d4d4d;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.confirm-panel .confirm {
+  margin-left: 30rpx;
 }
