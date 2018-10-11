@@ -160,7 +160,7 @@ Component({
               this.hidePanel()
               this.triggerEvent('calculate', this.data.totalCount)
               wx.showTabBar()
-              break;    
+              break;
         }
       }
     }

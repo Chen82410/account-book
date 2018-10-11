@@ -9,18 +9,26 @@ cloud.init({
 })
 
 const db = cloud.database()
-let create_time = ""
+
+const allBooks = ["expenditure_book", "income_book", "transfer_book"]
+
 // 云函数入口函数
 exports.main = async (event, context) => { 
+  let res = await cloud.callFunction({
+    name: "utils",
+    data: {
+      date: (Date.now() + 8 * 60 * 60 * 1000)
+    }
+  })
   try {
-    return await db.collection('Account_Book').add({      
+    return await db.collection(allBooks[event.account_type]).add({      
       data: {
         fee: event.fee,
         account_type: event.account_type,
         account_description: event.account_description,
-        remark_content: event.remark_content,
-        // create_time: formatTime((new Date().getTime()), "Y-M-D h:m:s")
-        create_time: new Date().getTime()
+        remark_content: event.remark_content,        
+        create_time: res.result,
+        open_id: event.userInfo.openId
       }
     })
   } catch (e) {
