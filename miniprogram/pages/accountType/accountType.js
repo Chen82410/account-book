@@ -87,6 +87,7 @@ Page({
     let current = e.detail.current
     this.setData({
       currentTab: e.detail.current,
+      remarkContent: "单击添加备注",
       userChoice: this.data.allTypes[current][0]
     })
   },
@@ -98,6 +99,7 @@ Page({
     } else {
       this.setData({
         currentTab: current,
+        remarkContent: "单击添加备注",
         userChoice: this.data.allTypes[current][0]
       })
     }
