@@ -96,5 +96,14 @@ Page({
     wx.navigateTo({
       url: `../accountType/accountType?calculateRes=${this.data.calculateResult}`
     })
+  },
+  checkAccount: function () {
+    wx.cloud.callFunction({
+      name: "checkAccount"      
+    }).then(res => {
+      console.log(res)
+    }).catch(error => {
+      console.log(error)
+    })
   }
 })

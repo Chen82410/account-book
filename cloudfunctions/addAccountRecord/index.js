@@ -20,7 +20,7 @@ exports.main = async (event, context) => {
       date: (Date.now() + 8 * 60 * 60 * 1000)
     }
   })
-  try {
+  try {    
     return await db.collection(allBooks[event.account_type]).add({      
       data: {
         fee: event.fee,

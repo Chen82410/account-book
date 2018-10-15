@@ -3,11 +3,11 @@
     <view class='container-part'>
       <view class='total-account'>
         <view class='today common'>
-          <view class='title'>今日支出/收入</view>
+          <view class='title'>最近支出</view>
           <view class='main-content'>
             <view class='left'>
               <text class='top'>食物&餐饮</text>
-              <text class='bottom'>支出/收入</text>
+              <text class='bottom'>支出</text>
             </view>
             <view class='right'>
               <text class='top'>-￥18.00</text>
@@ -16,11 +16,24 @@
           </view>
         </view>
         <view class='today common'>
-          <view class='title'>历史支出/收入</view>
+          <view class='title'>最近收入</view>
           <view class='main-content'>
             <view class='left'>
               <text class='top'>食物&餐饮</text>
-              <text class='bottom'>支出/收入</text>
+              <text class='bottom'>最近收入</text>
+            </view>
+            <view class='right'>
+              <text class='top'>-￥18.00</text>
+              <text class='bottom'>20分钟前</text>
+            </view>
+          </view>
+        </view>
+        <view class='today common'>
+          <view class='title'>最近转账</view>
+          <view class='main-content'>
+            <view class='left'>
+              <text class='top'>支付宝</text>
+              <text class='bottom'>转账</text>
             </view>
             <view class='right'>
               <text class='top'>-￥18.00</text>
@@ -37,4 +50,5 @@
   bind:hidePanel="onHidePanel" 
   bind:calculate="bindCalculate">
   </caculator>
+  <button bindtap='checkAccount'>点击一下</button>
 </view>
