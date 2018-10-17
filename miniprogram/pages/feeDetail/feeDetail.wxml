@@ -1,0 +1,21 @@
+<!--miniprogram/pages/feeDetail/feeDetail.wxml-->
+<view class='fee-detail-root'>
+  <view scroll-y class="move-part">
+    <view class='item'
+      wx:for="{{allDetails}}">
+      <view class='title'>
+        <text>{{item.account_description}}</text>
+        <text>-￥{{item.fee}}</text>
+      </view>
+      <view class='time'>
+        <text>时间</text>
+        <text>{{item.create_time}}</text>
+      </view>
+      <view class='remark'>
+        <text class='remark-text'>备注</text>
+        <view class='remark-content'>{{item.remark_content}}</view>
+      </view>
+      <view class='edit'>编  辑</view>
+    </view>
+  </view>
+</view>

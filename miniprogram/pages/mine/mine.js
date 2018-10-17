@@ -7,13 +7,29 @@ Page({
    */
   data: {
     avatarUrl: "",
-    nickName: ""
+    nickName: "",
+    avatarID: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let that = this    
+    wx.getStorage({
+      key: 'localavatarUrl',
+      success: function(res) {
+        that.setData({
+          avatarID: res.data
+        })
+        wx.cloud.downloadFile({
+          fileID: that.data.avatarID,
+          success: res => {
+            console.log(res)
+          }
+        })
+      },
+    })
     this.setData({
       avatarUrl: app.globalData.userInfo.avatarUrl,
       nickName: app.globalData.userInfo.nickName
@@ -67,5 +83,38 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  getAvatarUrl: function () {
+    let that = this
+    let tempFilePath = ""
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: function(res) {
+        tempFilePath = res.tempFiles[0].path
+        wx.showLoading({
+          title: '上传中',
+        })        
+        wx.cloud.uploadFile({
+          cloudPath: `./avatar/${app.globalData.userInfo.nickName}`,
+          filePath: tempFilePath,
+          success: res => {
+            wx.hideLoading()
+            that.setData({
+              avatarUrl: tempFilePath
+            })
+            wx.setStorage({
+              key: 'localavatarUrl',
+              data: res.fileID,
+            })
+            console.log(res)
+          },
+          fail: error => {
+            console.log(error)
+          }      
+        })
+      },
+    })
   }
 })

@@ -1,4 +1,6 @@
 // miniprogram/pages/home/home.js
+import { formatDate } from "../../utils/index.js"
+
 Page({
 
   /**
@@ -10,14 +12,18 @@ Page({
     },
     calculatorShow: false,
     // 计算结果
-    calculateResult: 0
+    calculateResult: 0,
+    // 三种类型
+    allTypesArr: [],
+    feeType: ["支出", "收入", "转账"],
+    markType: ["-", "+", ""]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.checkAccount()
   },
 
   /**
@@ -98,12 +104,27 @@ Page({
     })
   },
   checkAccount: function () {
+    let that = this
     wx.cloud.callFunction({
       name: "checkAccount"      
     }).then(res => {
       console.log(res)
+      for (let item of res.result) {
+        for (let item1 of item.data) {
+          item1.create_time = formatDate(item1.create_time)
+        }
+      }
+      that.setData({
+        allTypesArr: res.result
+      })
     }).catch(error => {
       console.log(error)
+    })
+  },
+  toFeeDetail: function (e) {
+    let detail = encodeURIComponent(JSON.stringify(e.currentTarget.dataset.detail))
+    wx.navigateTo({
+      url: `../feeDetail/feeDetail?detail=${detail}`,
     })
   }
 })

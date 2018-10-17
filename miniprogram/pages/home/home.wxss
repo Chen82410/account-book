@@ -11,7 +11,7 @@
   width: 100%;
   /* height: 800rpx; */
   box-sizing: border-box;
-  padding: 16rpx 32rpx;
+  padding: 16rpx 32rpx;  
 }
 
 .home-bg .container-part {
@@ -49,6 +49,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 16rpx;
 }
 
 .main-content .left {

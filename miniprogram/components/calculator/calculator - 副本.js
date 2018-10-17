@@ -50,13 +50,11 @@ Component({
             totalCount: "" + this.data.totalCount + calculateMsg
           })
         }
-      } 
-      else if (calculateMsg !== "Del" && lastNumber === "." && calculateMsg !== "OK") {
+      } else if (calculateMsg !== "Del" && lastNumber === "." && calculateMsg !== "OK") {
         this.setData({
           totalCount: this.data.totalCount + calculateMsg
         })
-      } 
-      else { //非数字
+      } else { //非数字
         switch (calculateMsg) {
           case "C":
             this.setData({

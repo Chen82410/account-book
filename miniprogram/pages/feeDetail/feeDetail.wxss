@@ -1,0 +1,74 @@
+/* miniprogram/pages/feeDetail/feeDetail.wxss */
+.fee-detail-root {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  padding: 16rpx 32rpx;
+  overflow-y: scroll;
+}
+
+.fee-detail-root .move-part {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16rpx 32rpx;  
+}
+
+.move-part .item {
+  width: 100%;
+  font-size: 28rpx;
+  color: #4d4d4d;
+  margin-bottom: 32rpx;
+  box-shadow: 0 4rpx 24rpx 0 rgba(12,27,48,0.06);
+  border-radius: 8rpx;
+  box-sizing: border-box;
+  padding: 16rpx 32rpx;
+}
+
+.item .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+  border-bottom: 2rpx solid #ccc;
+  padding-bottom: 8rpx;
+}
+
+.item .time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+  border-bottom: 2rpx solid #ccc;
+  padding-bottom: 8rpx;  
+}
+
+.item .remark {
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #ccc;
+}
+
+.remark .remark-text {
+  font-weight: bold;
+  margin-right: 24rpx;
+}
+
+.remark .remark-content {
+  /* box-shadow: 0 4rpx 24rpx 0 rgba(12,27,48,0.06); */
+  padding: 16rpx 8rpx;
+}
+
+.item .edit {
+  margin-top: 16rpx;
+  padding: 16rpx 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1296bd;
+  font-size: 40rpx;
+  color: #fff;
+}

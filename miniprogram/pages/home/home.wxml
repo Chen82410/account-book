@@ -1,47 +1,33 @@
 <view class='home-root'>
-  <view class='home-bg'>
+  <view class='home-bg'>    
     <view class='container-part'>
-      <view class='total-account'>
-        <view class='today common'>
-          <view class='title'>最近支出</view>
-          <view class='main-content'>
+      <scroll-view class='total-account'
+        scroll-y="true">
+        <view class='today common'
+          wx:for="{{allTypesArr}}"
+          wx:for-index="index"
+          wx:for-item="item"
+          wx:key="key">
+          <view class='title'>最近{{feeType[index]}}</view>
+          <view class='main-content'
+            wx:for="{{item.data}}"
+            wx:for-index="index1"
+            wx:for-item="item1"
+            wx:key="key1"
+            wx:if="{{index1 < 2}}"
+            bindtap="toFeeDetail"
+            data-detail="{{item}}">
             <view class='left'>
-              <text class='top'>食物&餐饮</text>
-              <text class='bottom'>支出</text>
+              <text class='top'>{{item1.account_description}}</text>
+              <text class='bottom'>{{feeType[item1.account_type]}}</text>
             </view>
             <view class='right'>
-              <text class='top'>-￥18.00</text>
-              <text class='bottom'>20分钟前</text>
+              <text class='top'>{{markType[item1.account_type]}}￥{{item1.fee}}</text>
+              <text class='bottom'>{{item1.create_time}}</text>
             </view>
           </view>
-        </view>
-        <view class='today common'>
-          <view class='title'>最近收入</view>
-          <view class='main-content'>
-            <view class='left'>
-              <text class='top'>食物&餐饮</text>
-              <text class='bottom'>最近收入</text>
-            </view>
-            <view class='right'>
-              <text class='top'>-￥18.00</text>
-              <text class='bottom'>20分钟前</text>
-            </view>
-          </view>
-        </view>
-        <view class='today common'>
-          <view class='title'>最近转账</view>
-          <view class='main-content'>
-            <view class='left'>
-              <text class='top'>支付宝</text>
-              <text class='bottom'>转账</text>
-            </view>
-            <view class='right'>
-              <text class='top'>-￥18.00</text>
-              <text class='bottom'>20分钟前</text>
-            </view>
-          </view>
-        </view>
-      </view>
+        </view>       
+      </scroll-view>
     </view>
     <image class='add-icon' src='{{addImage.src}}' bindtap='isCalculated'></image>
   </view>
@@ -49,6 +35,5 @@
   is-show="{{calculatorShow}}" 
   bind:hidePanel="onHidePanel" 
   bind:calculate="bindCalculate">
-  </caculator>
-  <button bindtap='checkAccount'>点击一下</button>
+  </caculator>  
 </view>

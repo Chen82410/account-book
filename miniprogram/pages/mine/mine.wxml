@@ -7,4 +7,5 @@
       <text class='phone'>18842691097</text>
     </view>
   </view>
+  <button bindtap='getAvatarUrl'>点击更换头像</button>
 </view>
