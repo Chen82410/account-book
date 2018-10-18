@@ -1,5 +1,6 @@
 // miniprogram/pages/mine/mine.js
 const app = getApp()
+
 Page({
 
   /**
@@ -8,31 +9,64 @@ Page({
   data: {
     avatarUrl: "",
     nickName: "",
-    avatarID: ""
+    avatarID: "",
+    fileID: "",
+    openID: "",
+    userInfo: {},
+    getOauth: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this    
+    let that = this
+
     wx.getStorage({
-      key: 'localavatarUrl',
+      key: 'userInfo',
       success: function(res) {
         that.setData({
-          avatarID: res.data
-        })
-        wx.cloud.downloadFile({
-          fileID: that.data.avatarID,
-          success: res => {
-            console.log(res)
-          }
+          userInfo: JSON.parse(res.data),
+          avatarUrl: JSON.parse(res.data).avatarUrl,
+          nickName: JSON.parse(res.data).nickName
         })
       },
     })
-    this.setData({
-      avatarUrl: app.globalData.userInfo.avatarUrl,
-      nickName: app.globalData.userInfo.nickName
+    wx.getStorage({
+      key: 'getOauth',
+      success: function(res) {
+        that.setData({
+          getOauth: res.data
+        })
+      },
+    })
+    wx.getStorage({
+      key: 'fileID',
+      success: function(res) {
+        console.log(res)
+        wx.cloud.getTempFileURL({
+          fileList: [res.data],
+          success: function (response) {
+            console.log(response)
+            that.setData({
+              avatarUrl: response.fileList[0].fileID          
+            })            
+          }
+        })
+      },
+      fail: () => {
+        wx.getStorage({
+          key: 'userInfo',
+          success: function(res) {
+            let tempUserInfo = JSON.parse(res.data)
+            that.setData({
+              userInfo: tempUserInfo,
+              avatarUrl: tempUserInfo.avatarUrl,
+              nickName: tempUserInfo.nickName
+            })
+          },
+        })
+      }
     })
   },
 
@@ -87,6 +121,22 @@ Page({
   getAvatarUrl: function () {
     let that = this
     let tempFilePath = ""
+    wx.getStorage({
+      key: 'openid',
+      success: function(res) {
+        that.setData({
+          openID: res.data
+        })
+      },
+    })
+    wx.getStorage({
+      key: 'getOauth',
+      success: function(res) {
+        that.setData({
+          getOauth: res.data
+        })
+      },
+    })
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
@@ -95,26 +145,49 @@ Page({
         tempFilePath = res.tempFiles[0].path
         wx.showLoading({
           title: '上传中',
-        })        
+        })
         wx.cloud.uploadFile({
-          cloudPath: `./avatar/${app.globalData.userInfo.nickName}`,
+          cloudPath: `./avatar/${that.data.openID}`,
           filePath: tempFilePath,
           success: res => {
+            console.log(res)
             wx.hideLoading()
             that.setData({
-              avatarUrl: tempFilePath
+              avatarUrl: tempFilePath,
+              fileID: res.fileID              
             })
             wx.setStorage({
-              key: 'localavatarUrl',
+              key: 'fileID',
               data: res.fileID,
-            })
-            console.log(res)
+            })             
           },
           fail: error => {
             console.log(error)
           }      
         })
       },
+    })
+  },
+  getUserInfo: function () {
+    let that = this
+    wx.getUserInfo({
+      success: res => {
+        console.log(res)
+        app.globalData.userInfo = res.userInfo
+        that.setData({
+          avatarUrl: app.globalData.userInfo.avatarUrl,
+          nickName: app.globalData.userInfo.nickName,
+          getOauth: true          
+        })
+        wx.setStorage({
+          key: 'userInfo',
+          data: JSON.stringify(app.globalData.userInfo),
+        })
+        wx.setStorage({
+          key: 'getOauth',
+          data: true,
+        })
+      }
     })
   }
 })

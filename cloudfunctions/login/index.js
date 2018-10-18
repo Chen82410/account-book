@@ -9,14 +9,48 @@
  * - 经过微信鉴权直接可信的用户唯一标识 openid 
  * 
  */
-exports.main = (event, context) => {
-  console.log(event)
-  console.log(context)
+// https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
 
-  // 可执行其他自定义逻辑
-  // console.log 的内容可以在云开发云函数调用日志查看
+const cloud = require('wx-server-sdk')
+// 默认配置
+cloud.init()
+// 或者传入自定义配置
+cloud.init({
+  env: 'main-130627'
+})
 
-  return {
-    openid: event.userInfo.openId,
+const db = cloud.database()
+
+const Axios = require("axios")
+const APPID = "wxd73569f666a21285"
+const SECRET = "439c3e431280556f34d1538a23eda3f1"
+let result = {}
+
+exports.main = async (event, context) => {
+  try {
+    await Axios.get('https://api.weixin.qq.com/sns/jscode2session', {
+      params: {
+        appid: APPID,
+        secret: SECRET,
+        js_code: event.code,
+        grant_type: 'authorization_code'
+      }
+    })
+    .then(res => {
+      console.log(res.data)
+      result = res.data
+      db.collection("login").add({
+        data: {
+          session_key: result.session_key,
+          openid: result.openid
+        }
+      })
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  } catch (error) {
+    console.log(error)
   }
+  return {openid: result.openid}
 }

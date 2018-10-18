@@ -1,11 +1,13 @@
 <!--miniprogram/pages/mine/mine.wxml-->
 <view class='mine-root'>
   <view class='personal-msg'>
-    <image src='{{avatarUrl}}'></image>
+    <image 
+      src='{{avatarUrl}}'
+      bindtap='getAvatarUrl'></image>
     <view class='nickname-phone'>
-      <text class='nickname'>设置昵称</text>
+      <text class='nickname'>{{nickName}}</text>
       <text class='phone'>18842691097</text>
     </view>
   </view>
-  <button bindtap='getAvatarUrl'>点击更换头像</button>
+  <button wx:if="{{!getOauth}}" open-type="getUserInfo" bindgetuserinfo='getUserInfo'>获取头像昵称</button>
 </view>
